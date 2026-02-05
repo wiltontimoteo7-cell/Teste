@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviator Crash Moçambique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0b1624; font-family: sans-serif; }
+        .crash-text { text-shadow: 0 0 30px rgba(233, 30, 99, 0.4); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md bg-[#151f2c] rounded-[24px] p-6 text-center shadow-2xl border border-[#232d3b]">
+        <h1 class="text-[#f1c40f] text-2xl font-black uppercase tracking-wider mb-6">AVIATOR CRASH ✈️</h1>
+
+        <div class="mb-8">
+            <p class="text-gray-400 text-xs uppercase font-bold mb-1">Saldo: 🏦</p>
+            <div class="text-white text-xl font-black">MZN 10.000,00 💰</div>
+        </div>
+        
+        <div id="multiplier" class="text-8xl font-black my-10 text-[#e91e63] crash-text">1,00x 🚀</div>
+
+        <div class="bg-[#1c2735] p-4 rounded-2xl border border-[#2d3a4b] mb-4">
+            <p class="text-[#f1c40f] text-xs font-bold uppercase mb-3">Aposta 🏷️</p>
+            <div class="flex items-center gap-3 mb-4">
+                <button onclick="ajustar(-50)" class="w-12 h-12 bg-[#2d3a4b] text-white rounded-lg text-2xl font-bold hover:bg-[#3d4b5c]">-</button>
+                <div class="flex-1 bg-[#0b1624] h-12 flex items-center justify-center rounded-lg border border-[#3d4b5c]">
+                    <span id="valorAposta" class="text-white text-xl font-bold">450</span>
+                </div>
+                <button onclick="ajustar(50)" class="w-12 h-12 bg-[#2d3a4b] text-white rounded-lg text-2xl font-bold hover:bg-[#3d4b5c]">+</button>
+            </div>
+            <button id="btnAcao" onclick="toggleJogo()" class="w-full py-7 text-xl font-black uppercase rounded-xl transition-all shadow-lg bg-[#28a745] text-white">FAZER APOSTA 🎮</button>
+        </div>
+
+        <p class="text-gray-500 text-[11px] leading-tight px-4">Dica: faça cashout antes do crash. Se crashar, perde a aposta. 💡</p>
+    </div>
+
+    <script>
+        let currentMult = 1.0; 📈
+        let isRunning = false; 🏃
+        let interval; ⏱️
+        let valor = 450; 🔢
+
+        function ajustar(n) { if(!isRunning) { valor = Math.max(10, valor + n); document.getElementById('valorAposta').innerText = valor; } } ⚙️
+
+        function toggleJogo() {
+            const btn = document.getElementById('btnAcao');
+            if(!isRunning) {
+                isRunning = true; 🟢
+                currentMult = 1.0; 📍
+                btn.innerText = "CASH OUT 💸";
+                btn.className = "w-full py-7 text-xl font-black uppercase rounded-xl transition-all shadow-lg bg-[#f1c40f] text-black";
+                interval = setInterval(() => {
+                    currentMult += 0.03; 🆙
+                    document.getElementById('multiplier').innerText = currentMult.toFixed(2).replace('.', ',') + "x 🚀";
+                }, 100);
+            } else {
+                clearInterval(interval); 🛑
+                isRunning = false; 🔴
+                alert("🏆 VOCÊ GANHOU!\nValor: MZN " + (valor * currentMult).toFixed(2)); 💰
+                window.location.href = "https://media1.placard.co.mz/redirect.aspx?pid=4657&bid=1723"; 🔗
+            }
+        }
+    </script>
+</body>
+</html>
